@@ -1,0 +1,125 @@
+import React, { useState } from 'react';
+import { View, TextInput, Text, Button, StyleSheet } from 'react-native';
+
+const App = () => {
+    const [nota1, setNota1] = useState('');
+    const [nota2, setNota2] = useState('');
+    const [nota3, setNota3] = useState('');
+    const [nota4, setNota4] = useState('');
+    const [resultado, setResultado] = useState('');
+
+    const calcularMedia = () => {
+        const n1 = parseFloat(nota1);
+        const n2 = parseFloat(nota2);
+        const n3 = parseFloat(nota3);
+        const n4 = parseFloat(nota4);
+
+        if (isNaN(n1) || isNaN(n2) || isNaN(n3) || isNaN(n4)) {
+            setResultado("Notas inválidas.");
+            return;
+        }
+
+        const media = (n1 + n2 + n3 + n4) / 4;
+
+        if (media >= 6.0) {
+            setResultado(`Aprovado, sua nota é: ${media.toFixed(2)}`);
+        } else if (media > 4 && media <= 6) {
+            setResultado(`Recuperação, sua nota é: ${media.toFixed(2)}`);
+        } else {
+            setResultado(`Reprovado, sua nota é: ${media.toFixed(2)}`);
+        }
+    };
+
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title1}>Calculadora de Média</Text>
+
+            <TextInput
+                style={styles.input}
+                placeholder="Digite sua nota 1"
+                keyboardType="numeric"
+                value={nota1}
+                onChangeText={setNota1}
+            />
+
+            <TextInput
+                style={styles.input}
+                placeholder="Digite sua nota 2"
+                keyboardType="numeric"
+                value={nota2}
+                onChangeText={setNota2}
+            />
+
+            <TextInput
+                style={styles.input}
+                placeholder="Digite sua nota 3"
+                keyboardType="numeric"
+                value={nota3}
+                onChangeText={setNota3}
+            />
+
+            <TextInput
+                style={styles.input}
+                placeholder="Digite sua nota 4"
+                keyboardType="numeric"
+                value={nota4}
+                onChangeText={setNota4}
+            />
+
+            <TextInput
+                style={styles.resultInput}
+                placeholder="Resultado"
+                keyboardType="numeric"
+                value={resultado}
+                editable={false}
+            />
+
+    <Button title="Calcular Média" onPress={calcularMedia} color="#655578" />
+      <Text style={styles.title2}>Feito por: Gabriely Jó da Silva. ♡</Text>
+        </View>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#ffdef5',
+        padding: 20,
+    },
+    title1: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#655578',
+        marginBottom: 20,
+    },
+                title2: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#655578',
+        marginTop: 18,
+    },
+    input: {
+        width: '100%',
+        height: 40,
+        borderColor: '#655578',
+        borderWidth: 1,
+        marginBottom: 12,
+        paddingLeft: 10,
+        borderRadius: 5,
+        backgroundColor: '#fff',
+    },
+    resultInput: {
+        width: '100%',
+        height: 40,
+        borderColor: '#655578',
+        borderWidth: 1,
+        marginBottom: 20,
+        paddingLeft: 10,
+        borderRadius: 5,
+        backgroundColor: '#fac3e9',
+    },
+});
+
+export default App;
